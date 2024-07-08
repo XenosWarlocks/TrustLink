@@ -1,4 +1,5 @@
 import HeaderBox from '@/components/header-box';
+import RightSidebar from '@/components/right-sidebar';
 import TotalBalanceBox from '@/components/total-balance-box';
 import React from 'react';
 
@@ -23,7 +24,15 @@ const Home = async () => {
                     totalCurrentBalance={1222}
                 />
             </header>
+            {/* {<RecentTransactions />} */}
         </div>
+        <RightSidebar
+            user={loggedIn}
+            // transactions={account?.transactions}
+            transactions={[]}
+            // banks={accountsData?.slice(0, 2)}
+            banks={[{}, {}]}
+        />
     </section>
   )
 }
