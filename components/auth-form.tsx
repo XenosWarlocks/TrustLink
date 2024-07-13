@@ -12,20 +12,22 @@ import {
     FormLabel,
     FormMessage,
   } from "@/components/ui/form"
+  import { Loader2 } from 'lucide-react';
+  
+  import { z } from "zod"
+  import { zodResolver } from "@hookform/resolvers/zod";
+  import { useForm } from "react-hook-form";
+  import { useRouter } from 'next/navigation';
+  import { Button } from "@/components/ui/button";
+  import { authFormSchema } from '@/lib/utils';
+  import CustomInput from './custom-input';
+  import { signIn, signUp } from '@/lib/actions/user.actions';
   import { Input } from "@/components/ui/input"
-
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
-import { authFormSchema } from '@/lib/utils';
-import CustomInput from './custom-input';
-import { Loader2 } from 'lucide-react';
-import { signIn, signUp } from '@/lib/actions/user.actions';
 
 
 const AuthForm = ({ type }: {type: string}) => {
     // 1. Define your form.
+    const router = useRouter();
     const [user, setUser] = useState(null);
     const formSchema = authFormSchema(type);
     const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +54,7 @@ const AuthForm = ({ type }: {type: string}) => {
                     state: data.state!,
                     postalCode: data.postalCode!,
                     dateOfBirth: data.dateOfBirth!,
-                    ssn: data.ssn!,
+                    panCardNumber: data.panCardNumber!,
                     email: data.email,
                     password: data.password
                 }
@@ -64,6 +66,7 @@ const AuthForm = ({ type }: {type: string}) => {
                     email: data.email,
                     password: data.password
                 })
+                if(response) router.push('/')
             }
 
         } catch (error) {
@@ -126,7 +129,7 @@ const AuthForm = ({ type }: {type: string}) => {
                                     </div>
                                     <div className="flex gap-4">
                                         <CustomInput control={form.control} name='dateOfBirth' label="Date of Birth" placeholder='YYYY-MM-DD' />
-                                        <CustomInput control={form.control} name='ssn' label="SSN" placeholder='Example: 1234' />
+                                        <CustomInput control={form.control} name='panCardNumber' label="Pan Card Number" placeholder='Example: 1234' />
                                     </div>
                                 </>
                             )}
