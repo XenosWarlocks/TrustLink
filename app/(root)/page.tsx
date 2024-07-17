@@ -1,6 +1,7 @@
 import HeaderBox from '@/components/header-box';
 import RightSidebar from '@/components/right-sidebar';
 import TotalBalanceBox from '@/components/total-balance-box';
+import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react';
 
 const Home = async () => {
